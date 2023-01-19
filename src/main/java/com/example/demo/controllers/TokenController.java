@@ -18,6 +18,8 @@ import com.example.demo.jwt.JWTService;
 import com.example.demo.vo.Token;
 import com.example.demo.vo.TokenRequest;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @RestController
 public class TokenController {
 	@Autowired
@@ -45,7 +47,11 @@ public class TokenController {
 	}
 
 	@GetMapping(path = "/testtoken")
-	public String testToken() {
+	public String testToken(HttpServletRequest request) {
+		System.out.println(request.getRemoteHost());
+		System.out.println(request.getServerName());
+		System.out.println(request.getRemoteAddr());
+		System.out.println(request.getHeader("host"));
 		System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
 		System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
 
