@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -24,15 +25,24 @@ import jakarta.annotation.PostConstruct;
 public class JWTService {
 	Key key = null;
 
+	@Value("${jwt.key.password:root123}")
+	private String keyPass;
+
+	@Value("${jwt.key.alias:xxxx}")
+	private String jwtKeyAlias;
+
+	@Value("${jwt.key.storefile:Secret.jks}")
+	private String keyLocation;
+
 	@PostConstruct
 	public void init() {
 		FileInputStream fis = null;
 		try {
-			File file = ResourceUtils.getFile("classpath:Secret.jks");
+			File file = ResourceUtils.getFile("classpath:" + keyLocation);
 			KeyStore keyStore = KeyStore.getInstance("JKS");
 			fis = new FileInputStream(file);
-			keyStore.load(fis, "root123".toCharArray());
-			key = keyStore.getKey("xxxx", "root123".toCharArray());
+			keyStore.load(fis, keyPass.toCharArray());
+			key = keyStore.getKey(jwtKeyAlias, keyPass.toCharArray());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException();
