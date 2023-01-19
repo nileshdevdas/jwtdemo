@@ -21,6 +21,13 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.annotation.PostConstruct;
 
+/**
+ * The
+ * 
+ * @author Nilesh Devdas
+ *
+ * this is the most important part
+ */
 @Service
 public class JWTService {
 	Key key = null;

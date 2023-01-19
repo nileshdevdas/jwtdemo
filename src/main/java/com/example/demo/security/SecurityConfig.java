@@ -18,7 +18,6 @@ import com.example.demo.JWTFilter;
 @Configuration
 @EnableWebSecurity(debug = true)
 public class SecurityConfig {
-
 	@Autowired
 	private JWTFilter filter;
 
@@ -35,14 +34,14 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		// WHITELISTS
+		//TODO please check this part is important
 		http.authorizeHttpRequests(r -> r.requestMatchers("/token/**", "/login/**", "/error/**").permitAll());
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		// DENYALL
 		http.authorizeHttpRequests().anyRequest().authenticated().and().formLogin();
 		http.csrf().disable();
-
+		// TODO please check this part is important
 		http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-
 		return http.build();
 	}
 }

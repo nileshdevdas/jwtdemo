@@ -39,6 +39,7 @@ public class JWTFilter extends OncePerRequestFilter {
 			String rawToken = tokenData.substring("Bearer ".length(), tokenData.length());
 			if (jwtService.isValid(rawToken)) {
 				String username = jwtService.getUsernameFromToken(rawToken);
+				//TODO please check this part is important
 				if (username != null) {
 					UserDetails details = userDetailsService.loadUserByUsername(username);
 					SimpleGrantedAuthority authority = new SimpleGrantedAuthority(jwtService.getRole(rawToken));
