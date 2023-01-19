@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "2a3e022a-213f-4db9-b8bd-064be8585e01",
+		"name": "JWTTests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/testtoken",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzUxMiJ9.eyJyb2xlIjoiQWRtaW4iLCJzdWIiOiJuaWxlc2hkQHZpbnN5cy5jb20iLCJpYXQiOjE2NzQxMTU1MTAsImV4cCI6MTY3NDExNjQxMH0.HfeOddfMRwTHkKyWYFivvEdTthGDGLhvESX1X-Vd_cxClgnsNOD5bMFLLMrcDa_DVm7WwExXLJx-3VJTpNPiCgSjwZylneb3yc4HTppE0S5UFFBBuHslXJFjjnyNgQ6eNhg42ugzMmyqh7KV6MdE6I_W07qjBH5qHVDWkbSqCubPOgoylB3GbcP2Z5qYdFwCQEeWi9KZM2BTFHdnHz4DuJHq1qh95xRXZpMjBl6usEpGIHOwdwQVk3KweGx6n9di_kgzE9kOTIsAY3s8CAsIv4dJyWovjuHKHMefGxRVN0DkPkyvA-VkYqDH035IGOGc0OQB0WXXBBkkYHB6G5dfbQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/testtoken",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"testtoken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"nileshd@vinsys.com\", \r\n    \"password\" : \"root123\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"token"
+					]
+				},
+				"description": "Generate the token"
+			},
+			"response": []
+		}
+	]
+}
