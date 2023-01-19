@@ -18,6 +18,7 @@ import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 import com.example.demo.JWTFilter;
+import com.ulisesbocchio.jasyptspringboot.annotation.EncryptablePropertySource;
 
 @Configuration
 @EnableWebSecurity(debug = true)
@@ -27,13 +28,8 @@ public class SecurityConfig {
 
 	@Bean
 	HttpFirewall getFirewall() {
-		/**
-		 * Firewall Kind Rules in our Applicatio Interceptor a) Allowed Parameters b)
-		 * Allowed Headers c) Allowed Header Values d) Allowed Param Values e) Allowed
-		 * Hosts f) Allwing Semicolons URl
-		 */
 		StrictHttpFirewall firewall = new StrictHttpFirewall();
-		firewall.setAllowedHeaderNames(h -> h.equals("www.demo.com"));
+		firewall.setAllowedHostnames(h -> h.equals("www.demo.com"));
 		return firewall;
 	}
 
@@ -60,10 +56,6 @@ public class SecurityConfig {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authorizeHttpRequests().anyRequest().authenticated().and().formLogin();
 		http.csrf().disable();
-		http.sessionManagement().maximumSessions(1);
-		http.headers().contentSecurityPolicy("");
-		http.headers().cacheControl().disable();
-		http.headers().frameOptions().sameOrigin();
 		http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();
 	}
